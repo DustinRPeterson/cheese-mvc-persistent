@@ -29,7 +29,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value="add", method= RequestMethod.GET)
-    public String add(Model model) {
+    public String displayAddCategoryForm(Model model) {
         model.addAttribute("title", "New Category");
         model.addAttribute(new Category());
 
@@ -37,7 +37,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value="add", method=RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid Category category, Errors errors) {
+    public String processAddCategoryForm(Model model, @ModelAttribute @Valid Category category, Errors errors) {
 
 
         if (errors.hasErrors()) {
