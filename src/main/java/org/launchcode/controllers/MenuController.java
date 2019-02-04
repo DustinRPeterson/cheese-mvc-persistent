@@ -58,12 +58,23 @@ public class MenuController {
         return "redirect:view/" + menu.getId();
     }
 
-    //@RequestMapping(path="add-item/{id}")
-   // public String addItem(Model model, @PathVariable("id") int id) {
-   //     Menu menuItem = menuDao.findOne(id);
+    @RequestMapping(path="add-item/{id}", method = RequestMethod.GET)
+    public String addItem(Model model, @PathVariable("id") int id) {
+        Menu menuItem = menuDao.findOne(id);
+        model.addAttribute("menu", menuDao.findOne(id));
+        model.addAttribute("cheeses", cheeseDao.findAll());
+
+        return "add-item.html";
 
 
-   // }
+    }
+
+    @RequestMapping(path="add-item/{id}", method=RequestMethod.POST)
+    public String addItem(Model model, @PathVariable("id") int id, Error error) {
+
+        return "";
+    }
+
 
     @RequestMapping(path="menu/{id}")
     public String viewMenu(Model model, @PathVariable("id") int id) {
