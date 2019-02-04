@@ -29,6 +29,10 @@ public class Cheese {
     @ManyToMany(mappedBy = "cheeses")
     private List<Menu> menus;
 
+    public void addItem(Menu item) {
+        menus.add(item);
+    }
+
 
     public Cheese(String name, String description) {
         this.name = name;
