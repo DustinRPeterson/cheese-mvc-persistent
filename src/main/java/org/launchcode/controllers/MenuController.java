@@ -63,6 +63,7 @@ public class MenuController {
     public String addItem(Model model, @PathVariable("id") int id) {
         Menu menuItem = menuDao.findOne(id);
         //model.addAttribute("menu", menuDao.findOne(id));
+        model.addAttribute("title", "Add item to menu: " + menuItem.getName());
         model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute(new AddMenuItemForm());
 
