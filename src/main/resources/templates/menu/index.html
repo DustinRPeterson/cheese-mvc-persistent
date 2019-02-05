@@ -9,7 +9,9 @@
         <nav th:replace="fragments :: navigation"></nav>
 
         <ul>
-            <li th:each="menuItem : ${menu}" th:text="${menuItem.name}"><a href="menu/view/${menuItem.id}" /></li>
+            <div th:each="menuItem : ${menu}">
+                <li><a th:href="@{/menu/view/{id}(id=${menuItem.id})}" th:text="${menuItem.name}"></a></li>
+            </div>
         </ul>
 
         <nav>

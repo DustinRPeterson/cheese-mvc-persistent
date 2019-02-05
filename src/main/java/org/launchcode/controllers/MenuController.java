@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value="menu")
@@ -64,7 +66,22 @@ public class MenuController {
         Menu menuItem = menuDao.findOne(id);
         //model.addAttribute("menu", menuDao.findOne(id));
         model.addAttribute("title", "Add item to menu: " + menuItem.getName());
-        model.addAttribute("cheeses", cheeseDao.findAll());
+        List<Cheese> cheeseList = new ArrayList<>();
+        List<Cheese> menuList = new ArrayList<>();
+
+
+        cheeseList = menuItem.getCheeses();
+
+        for(Cheese cheese: cheeseDao.findAll()) {
+            if(!cheeseList.contains(cheese)) {
+                menuList.add(cheese);
+            }
+        }
+
+        //for(Cheese cheese : cheeseList) {
+        //    menuList.remove(cheese);
+        //}
+        model.addAttribute("cheeses", menuList);
         model.addAttribute(new AddMenuItemForm());
 
         return "/menu/add-item";
@@ -93,7 +110,7 @@ public class MenuController {
     @RequestMapping(path="view/{id}")
     public String viewMenu(Model model, @PathVariable("id") int id) {
         Menu thisMenu = menuDao.findOne(id);
-
+        model.addAttribute("title", "Menu: " + thisMenu.getName());
         model.addAttribute("menu", thisMenu);
         return"/menu/view";
 
